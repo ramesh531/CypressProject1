@@ -1,0 +1,337 @@
+Cypress points by Pavan (SDET QA)
+
+Introduction:
+
+URL : https://cypress.io
+Documentation: https://docs.cypress.io
+
+Frontend web application tool to test modern web applications written
+in React JS, Angular JS . any application which runs on browser.
+
+We will use Javascript or TypeScript as programming languages.
+
+It doesn't use seleniuum.
+
+It's open source. It has 2 components
+Cypress App (TestRunner_ - It's free 
+Cypress Dashboard  - Paid
+
+Node.js and comes with npm(node package manager) module.
+
+Who can use - Dev & QA
+End to End test cases
+Integration tests
+Unit Test cases
+API Testing
+
+Features or Advantages:
+1)Time Travel (We can go to particular step and run from there)
+2) Debuggability 
+3) Automatic waits (built-in waits)
+4) Consistent results. It's bcoz it's running inside the browser
+5) Screenshots and videos are captured automatically.
+6) Cross browser testing 
+
+Limitatiosn
+1)Can't automate window based and Mobile applications
+2)Limited browser support
+3)We can write code only JavaScript/TypeScript
+4)Reading/writing data into file is difficult
+5)Integrating third party reporting tool (extent-report etc) is difficult
+
+
+
+
+Difference b/w Selenium and Cypress
+                      seleniuum              Cypress
+
+Application Support    Only web               Web& API
+Cost                   free                   Free
+Setup & Installation   Difficult              Easy
+languages              Java,Python,Ruby,JS,C# JavaScript & TypeScript
+Browsers               All Browsers           Chromium (Chrome,Firfox,Edge,Electron)
+Frameworks support     Junit,TestNg,pyTest etc Mocha JS
+Performance            Slow,runs outside the   Faster since its runs inside of the browser
+                       browser
+Reporting              Integration with        Mocha reporter,Cypress Dashborad
+                       Extent & Allure etc
+
+
+Environment Setup
+1)Download & install nodejs
+2)Download & install Visual Studio Code (VS Code)
+3)Create a new folder for project and open the folder in the VS Code
+4)open cmd/terminal then execute below command
+npm -i init   ==> creates package.json file
+5)Install cypress
+npm install cypress --save -dev
+6)To Start cypress (Cypress related libraires will be in node_modules folder)
+  npx cypress open
+
+7)The folder structure will be created by the cypress by default
+
+node --version or node -v will provide the version number
+v18.14.0
+
+npm --version
+9.3.1
+
+**
+
+In Cypress every test case is called as spec . We write specs under e2e folder
+
+Launch the cypress app using below command
+npx cypress open
+
+naming convention
+SpecName.cy.js  (mytest1.cy.js)
+
+Writing & Executing cypress tests
+
+describe('Suite Name',()=>
+{
+ it('test1',()=>{
+  expect(true).to.equal(true)
+ })
+
+})
+
+describe('Suite Name',function(){
+it('test1',function(){
+
+  expect(true).to.equal(true)
+})
+
+})
+
+Spec File(cy.js) -->describie --> it block
+
+Every Spec file can have multiple describe sections
+Every describe should have multiple it blocks
+Each it represents one test case
+We can use single quote or double quotes in JS. There is no diff
+
+To run tests using npx command. By default it run in electron browser in headless mode
+npx cypress run  [This will execute all specs under e2e folder]
+
+npx cypress run --headed
+
+To run a specific spec in chrome
+npx cypress run -s specname(relative path) -b chrome --headed
+
+Ex: npx cypress run -s cypress/e2e/MyFirstTest.cy.js -b chrome --headed
+
+*****
+Locators
+Everything is a webelement in a web page. it may be TextField,link,image or button etc.
+
+Cypress by default use CSS Selector.
+We can install additional plug in( Cypress Xpath) to support XPath selector
+
+Identification of element
+Locating element
+
+cy.get('')  //get is used to identify.Then locate the web element
+cy.get(locator)
+
+<input class="oxd-input oxd-input--active" name="username" placeholder="Username" autofocus="" data-v-844e87dc="" fdprocessedid="ydyem">
+4 ways of CSS Selector:  tag is optional here
+tag id          tag#id
+tag class       tag.class input.oxd-input oxd-input--active   or 
+tag attribute   tag[attribute='value'] input[name='username'] or [name='username']
+tag class attribue tag.class[attribute='value']
+
+
+install cypress xpath plugin 
+
+npm install -D cypress-xpath
+Once done add the below reference in the commands.js file
+/// <reference types='cypress-xpath' />
+
+Add below line in e2e.js file
+require('cypress-xpath')
+
+you need to use cy.xpath method when u r using xpath
+cy.xpath('xpath')
+
+***
+Cypress Assertions
+1) Implicit (Default / Built in)
+   should , and
+2) Explicit -
+   expect  - we use mainly in BDD approach
+   assert  - we use in TDD approach
+
+Ex:  cy.url().should('include','orangehrmlive.com')
+    .and('eq','https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    .and('contain','orange')
+    .and('not.contain','yellowhrm')
+
+    eq,contain,include,exist,have.length,have.value etc..
+
+Ex:    //Validation on web elements using implicit
+    cy.get('.orangehrm-login-branding').should('be.visible')
+    and('exist')
+*****
+    Explicit Assertions are customized assertions in cypress
+
+    expect - BDD
+    asset - TDD
+
+    *****
+    Project structure of cypress project Cypress10 onwards
+
+    cypress - main folder
+      downloads - contains downloaded files
+      
+      e2e  - contains all the test cases (it) . Extension cy.js
+      
+      fixtures - contains static test data in json format
+      
+      Screenshots - All screenshots wil be stored here
+      
+      support/commands.js - we can include custom commands. 
+      add new command
+      overwrite existing commands
+      
+      support/e2e.js  - before executing spec file you want 
+      to run some commands then you can include it here.
+     
+      videos folder contains recorded videos in mp4 format
+     
+      node_modules - all npm modules will be here
+      
+      cypress.config.js  -  Here we can specify cypress configuration
+      
+      package.json - This file contains the dependencies for cypress
+
+
+
+
+***************************************************************
+***********************************************************************
+
+Cypress points by Raghav (Automation Step by Step)
+
+Read files using fixture()
+
+Read files using readFile()
+
+Writer files using writeFile()
+
+Create a new file and keep it in fixture folder
+
+
+***
+Step 1.install plugin cypress-file-upload to upload files in cypress
+
+npm install --save-dev cypress-file-upload
+and check in package.json under devDependencies it's added or not
+
+Step 2. Add to cypress/support/commands.js 
+import 'cypress-file-upload'
+
+ npm install cypress-downloadfile
+
+Add the below  to command.js in support folder
+ require('cypress-downloadfile/lib/downloadFileCommand')
+
+**
+
+HTML reports in cypress
+1.How to install mochawesome reporter
+2.How to configure the reporter
+3.How to merge multiple json report files
+4.How to generate single html report
+5. Troubleshoot issues like 
+   Unexpected token ? in JSON at position 0
+   Unexpected end of JSON input
+6. Run reports command automatically using pretest and posttest scripts in package.json
+
+
+
+***
+
+
+CLI - Command Line Interface
+ It's easier,faster,efficient
+ less memory consuming
+ to integrate testing with external process CI & CD like Jenkins
+
+Step 1 :  Open terminal and run command  
+npx cypress run - It runs all the tests under the project in the e2e folder
+By default it runs the tests in Electron browser (headless ) mode
+
+ To see different options
+ npx cyress run --help or -h
+ npx cypress run --spec or -s (provide the spec file name)
+ PS C:\Cypress\CypressProject1> npx cypress run -s .\cypress\e2e\pom_demo.cy.js
+
+  npx cypress run --browser or -b (provide the browser name)
+   PS C:\Cypress\CypressProject1> npx cypress run -s .\cypress\e2e\pom_demo.cy.js -b chrome
+
+   npx cypress run --headless  (run the spec in headless mode)
+ npx cypress run -s .\cypress\e2e\pom_demo.cy.js -b firefox --headless
+
+ To run in head mode
+  npx cypress run -s .\cypress\e2e\pom_demo.cy.js -b firefox --headed
+
+
+Step 2 : You can run from packag.json file 
+Step 3: Add under scripts section
+
+"scripts": {
+    "pretest": "echo I am pretest",
+    "posttest": "echo I am protest",
+    "test": "echo I am the test ",
+    "hello": "echo Hello world",
+    "runtests": "cypress run"
+  },
+
+ npm run test
+ npm run scripname (That's mentioned in the scripts section)
+
+ Step 4 : You can set configuration from command line 
+  syntax :npx cypress run --config  <config>
+  Ex: 
+ npx cypress run -s .\cypress\e2e\pom_demo.cy.js --config defaultCommandTimeout=9000, watchForFileChanges=false
+
+npx cypress open - Open the cypress app
+
+npx cypress verify - Verifies cypress in installed correctly and is executable
+
+npx cypress version - prints cypress version
+
+npx cypress info  - prints all info about cypress 
+
+npx cypress cache - print cypress global cache
+ex: npx cypress cache list
+
+****************
+
+package.json is very importanf file for every node project
+It always located in the root folder. It has info abou the project like name,version, dependencies and devDependencies
+
+To create a node project on a folder
+npm init 
+npm init -y 
+This creates package.json file
+
+name  // it has max of 214 characters . we can't start with . or _ . It shouldn' have uppercase letter
+
+ name + version gives unique unique package 
+
+ scripts  - dictionary containing script commands run at various times in the lifecycle of your package
+
+ keywords : [] // array of strings that can be used to identify your package in npm search
+
+ ISC - Internet System Consortium
+
+ npm install - installs both dev and normal dependencies
+ npm install --dev  - install only dev dependencies
+ npm install --prod - install only dependencies section won't install dev dependencies
+ 
+ `1.2.3 will match all 1.2.x versions but will miss 1.3.0
+ ^1.2.3 will match any 1.x.x release including 1.3.0 but will hold off on 2.0.0
+
+

@@ -1,0 +1,28 @@
+{
+  "name": "cypressproject1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "echo I am pretest",
+    "posttest": "echo I am protest",
+    "test": "echo I am the test ",
+    "hello": "echo Hello world",
+    "runtests": "cypress run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^12.5.1",
+    "cypress-downloadfile": "^1.2.3",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^4.2.2",
+    "mochawesome-report-generator": "^6.2.0"
+  },
+  "devDependencies": {
+    "cypress-file-upload": "^5.0.8",
+    "cypress-mochawesome-reporter": "^3.2.3",
+    "cypress-xpath": "^2.0.1"
+  }
+}
