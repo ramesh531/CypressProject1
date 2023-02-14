@@ -1,4 +1,4 @@
-import { LoginPage } from "./pages/login_page";
+import {LoginPage}  from "./pages/login_page";
 
 //var loginPage = new LoginPage()
 const loginPage = new LoginPage()
@@ -52,3 +52,16 @@ it('Login Test With Invalid Password', function () {
  
  })
 
+ //using pom fixture
+ it.only('using fixture',()=>{
+
+    cy.fixture('orangehrm.json').then((data) =>{
+
+        cy.log(data.username)
+        cy.log(data.password)
+        loginPage.enterUsername(data.username)
+        loginPage.enterUsername(data.password)
+        loginPage.clickLogin()
+    })
+
+ })

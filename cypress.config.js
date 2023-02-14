@@ -2,7 +2,7 @@ const { defineConfig } = require("cypress")
 const {downloadFile} = require('cypress-downloadfile/lib/addPlugin')
 
 module.exports = defineConfig({
-  reporter: 'cypress-mochawesome-reporter', //for html reports
+  reporter: 'cypress-mochawesome-reporter', //To generate for html reports
   e2e: {
     watchForFileChanges: false,
     defaultCommandTimeout: 7000,
